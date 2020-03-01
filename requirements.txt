@@ -1,0 +1,5 @@
+submit a revised version of our code which compiles and runs to provide a working version of the game connectn, allowing 1 human player to play 2 computer players.
+we recommend you first get a game of connect4 working for one human and one computer player.
+you may wish (but are not obliged) to start by commenting out large parts of our code and altering our printboard() method. this approach has the advantage of giving you a relatively manageable starting point in the debugging process.
+you may also wish to tackle our placecounter() method next.
+once you have a working game of connect4 for two players, extend your code to work for 3 players (1 human vs. 2 computer players) in a game of connectn, where 2 < n < 7. this code will be what you need to submit.

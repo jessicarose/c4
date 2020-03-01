@@ -1,10 +1,18 @@
 package connect4;
 
-public class ComputerPlayer {
-	
-	public char gameToken;
 
-	public ComputerPlayer(char gameToken){
-		this.gameToken = gameToken;
+	class ComputerPlayer extends Player{
+
+		public ComputerPlayer(char gameToken) {
+			super(gameToken);
+		}
+
+		@Override
+		void getMove() {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
-}
+
+
