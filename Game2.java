@@ -6,8 +6,7 @@ public class Game2 {
 
 	private HumanPlayer Player1;
 	private ComputerPlayer Player2;
-	//uncomment player3 when ready
-	//	private ComputerPlayer Player3;
+	private ComputerPlayer Player3;
 	private Board Board;
 	private Object[] Players;
 
@@ -16,10 +15,10 @@ public class Game2 {
 	this.Board = new Board();
 	this.Player1 = new HumanPlayer('o');
 	this.Player2 = new ComputerPlayer('x');
-	//this.Player3 = new ComputerPlayer('u');
+	this.Player3 = new ComputerPlayer('u');
 	this.Players[0] = Player1;
 	this.Players[1] = Player2;
-	//this.Players[2] = Player3;
+	this.Players[2] = Player3;
 	
 	}
 	
