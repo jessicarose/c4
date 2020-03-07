@@ -3,11 +3,15 @@ package connect4;
 public class Main {
 
 	public static void main(String[] args) { 
-	//	Board thisBoard = new Board();
-	//	thisBoard.defineBoard();
-	//	thisBoard.drawBoard();
+		Board thisBoard = new Board();
+		thisBoard.defineBoard();
+		thisBoard.drawBoard();
 		
-		Game thisGame = new Game();
+		System.out.println("Press 2 for a 2 player game. 3 for a 3 player game.");
+		//take user input
+		//if 2, run game
+		//if 3 run game2
+		//if anything else, ask again
 
 	}
 
