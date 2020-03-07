@@ -9,7 +9,9 @@ package connect4;
 
 		@Override
 		void getMove() {
-			// TODO Auto-generated method stub
+			// iterate over board to find open columns
+			//select open column at random
+			//return selected column number
 			
 		}
 		

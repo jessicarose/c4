@@ -21,10 +21,12 @@ public class Main {
 		//take user input
 		if (userInput == 2) {
 			System.out.println("2 player game");
+			//1 human, 1 computer
 			//run game.java here
 		}
 		else if (userInput == 3){
 			System.out.println("3 player game");
+			//1 human, 2 computer
 			//run game2.java here
 		}
 		else {
