@@ -58,15 +58,41 @@ public void playerTurn(){
 	int currentPlayerTurnNumber = 0;
 	while(!win) {
 		int columnNumber = Players[currentPlayerTurnNumber].getMove();
+		boolean isValid = validateMove(columnNumber) 
+		if (isValid) {
+			
+			
+			
+		} else {
+			//skip turn
+		}
+
+		
 		
 	}
 }
  boolean validateMove(int columnNumber) {
-	 int numRows = this.Board.boardSpaces[0].length;
 	 //checks the top of game board in designated column row to see if it (and thus the row) is full
 	 if (this.Board.boardSpaces[0][columnNumber-1]== '.') {
 		 return true;
+	 } else {
+		 //move is not valid
+		 return false;
 	 }
+ }
+ 
+ void placeMove(int columnNumber, char gameToken) {
+	 int rowCount = Board.boardSpaces[0].length;
+	 for (int i = rowCount - 1; i > 0; i --) {
+		 if (this.Board.boardSpaces[i][columnNumber-1]== '.') {
+			 this.Board.boardSpaces[i][columnNumber-1] = gameToken;
+			 break;
+		 }
+	 }
+	 //loop up from bottom of the array
+	 //find the first blank space in the column
+	 //set that index value to playerToken
+ }
 	 
 	 //take in the col number
 	 //-1 
