@@ -1,4 +1,5 @@
 package connect4;
+import java.io.BufferedReader;
 
 
 
@@ -26,6 +27,7 @@ public class Game {
 	System.out.println("");
 
 	boolean win = false;
+	
 	
 	}
 	

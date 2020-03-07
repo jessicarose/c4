@@ -1,15 +1,38 @@
 package connect4;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
 
 public class Main {
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) throws IllegalArgumentException, IOException { 
 		Board thisBoard = new Board();
 		thisBoard.defineBoard();
 		thisBoard.drawBoard();
 		
-		System.out.println("Press 2 for a 2 player game. 3 for a 3 player game.");
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Press 2 for a 2 player game. 3 for a 3 player game.");
+		 
+		int userInput = Integer.parseInt(reader.readLine());
+		
 		//take user input
+		if (userInput == 2) {
+			System.out.println("2 player game");
+			//run game.java here
+		}
+		else if (userInput == 3){
+			System.out.println("3 player game");
+			//run game2.java here
+		}
+		else {
+			System.out.println("Please try again, selecting 2 or 3");
+			
+		}
 		//if 2, run game
+		
 		//if 3 run game2
 		//if anything else, ask again
 
