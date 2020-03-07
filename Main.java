@@ -3,9 +3,11 @@ package connect4;
 public class Main {
 
 	public static void main(String[] args) { 
-		Board thisBoard = new Board();
-		thisBoard.defineBoard();
-		thisBoard.drawBoard();
+	//	Board thisBoard = new Board();
+	//	thisBoard.defineBoard();
+	//	thisBoard.drawBoard();
+		
+		Game thisGame = new Game();
 
 	}
 

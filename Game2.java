@@ -2,21 +2,25 @@ package connect4;
 
 
 
-public class Game {	
-//run this version of the game for 1 human player against 1 computer player
+public class Game2 {	
+
 	private HumanPlayer Player1;
 	private ComputerPlayer Player2;
+	//uncomment player3 when ready
+	//	private ComputerPlayer Player3;
 	private Board Board;
 	private Object[] Players;
 
-	public Game(){
+	public Game2(){
 		
 	this.Board = new Board();
 	this.Player1 = new HumanPlayer('o');
 	this.Player2 = new ComputerPlayer('x');
 	//change to a letter if not a valid char
+	//this.Player3 = new ComputerPlayer('*');
 	this.Players[0] = Player1;
 	this.Players[1] = Player2;
+	//this.Players[2] = Player3;
 	
 	}
 	
