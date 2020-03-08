@@ -8,11 +8,10 @@ import java.io.InputStreamReader;
 public class Main {
 
 	public static void main(String[] args) throws IllegalArgumentException, IOException { 
-		Board thisBoard = new Board();
-		thisBoard.defineBoard();
-		thisBoard.drawBoard();
-		
-
+		Game Game = new Game();
+	
+		Game.playerTurn();
+         /*
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Press 2 for a 2 player game. 3 for a 3 player game.");
 		 
@@ -32,7 +31,8 @@ public class Main {
 		else {
 			System.out.println("Please try again, selecting 2 or 3");
 			
-		}
+		} */
+		
 		//if 2, run game
 		
 		//if 3 run game2

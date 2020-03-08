@@ -10,13 +10,13 @@ class HumanPlayer extends Player{
 
 		}
 	@Override
-	void getMove() {
+	int getMove() {
 		//Stuck trying to make a scanner that takes an input and converts that to an int to pass up as the move, does Player class need a parameter that holds the value of the move? How the fuck do scanners work?
 		Scanner inputMove = new Scanner(System.in);
 	    System.out.println("Pick your row, 1-7");   
 	    
 	    String input = inputMove.nextLine();  // Read user input
-	    System.out.println(input);
+	    return(Integer.parseInt(input));
 
 		    
  

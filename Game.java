@@ -1,5 +1,6 @@
 package connect4;
 import java.io.BufferedReader;
+import java.io.IOException;
 
 
 
@@ -43,11 +44,10 @@ public class Game {
 	}
 	
 	
-public void playerTurn(){
+public void playerTurn() throws IOException{
 	//have a loop going for turns between players
 	//for each player, run getMove method
-	//validate the move if needed (human players)
-	//write a placeMove method, which takes validated move from either player class and places on board
+	
 	//write a checkWin method that:
 	//checks for win conditions around placed move horizontally
 	//checks for win conditions around placed move vertically
@@ -58,9 +58,21 @@ public void playerTurn(){
 	int currentPlayerTurnNumber = 0;
 	while(!win) {
 		int columnNumber = Players[currentPlayerTurnNumber].getMove();
-		boolean isValid = validateMove(columnNumber) 
+		boolean isValid = validateMove(columnNumber);
 		if (isValid) {
-			
+			 placeMove(columnNumber, Players[currentPlayerTurnNumber].gameToken);
+			 //move to next player's turn
+			 currentPlayerTurnNumber = currentPlayerTurnNumber +1;
+			 //loop back to the first player if it's their turn
+			 if (currentPlayerTurnNumber == Players.length) {
+				 currentPlayerTurnNumber = 0;
+			}
+			 
+			 Board.drawBoard();
+			 
+			 //check the array length
+			 //if it's not at the max, increment by 1
+			 //if at max set to zero
 			
 			
 		} else {
@@ -82,11 +94,11 @@ public void playerTurn(){
  }
  
  void placeMove(int columnNumber, char gameToken) {
-	 int rowCount = Board.boardSpaces[0].length;
-	 for (int i = rowCount - 1; i > 0; i --) {
+	 int rowCount = Board.boardSpaces.length;
+	 for (int i = rowCount - 1; i >= 0; i --) {
 		 if (this.Board.boardSpaces[i][columnNumber-1]== '.') {
 			 this.Board.boardSpaces[i][columnNumber-1] = gameToken;
-			 break;
+			 break; 
 		 }
 	 }
 	 //loop up from bottom of the array
@@ -102,4 +114,4 @@ public void playerTurn(){
 	 
  }
 
-}
+

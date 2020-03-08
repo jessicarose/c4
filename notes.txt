@@ -1,3 +1,36 @@
 
 [4] -- [player] -> Human,CpuPlayer
 
+..1-0grea
+122
+..2
+
+
+column 3 
+
+[0][2]
+[1][2]
+[2][2]
+
+
+arr[3][3];
+
+
+if you want to set row 1 column 1 > 1
+board[1][1] = 1;
+
+loop over the array and check columnNumber-1 spot in each row arrayLength
+
+
+----------
+Scenario 1
+// empty board
+...
+...
+...
+
+
+1 - player 1 says , put in column 1
+-run vaidatekMove if yes
+-iterate backwards through array
+-

@@ -8,7 +8,7 @@ abstract class Player {
 	public Player(char gameToken) {
 		this.gameToken = gameToken;
 	}
-	abstract void getMove() throws IOException;
+	abstract int getMove() throws IOException;
 		//allows user to select move
 		//subclasses contain move logic for human and computer players
 		
