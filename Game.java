@@ -28,6 +28,7 @@ public class Game {
 		this.Players[0] = Player1;
 		this.Players[1] = Player2;
 
+
 		//
 
 		System.out.println("Welcome to ConnectN");
@@ -42,15 +43,7 @@ public class Game {
 	}
 
 	public void playerTurn() throws IOException {
-		// have a loop going for turns between players
-		// for each player, run getMove method
-
-		// write a checkWin method that:
-		// checks for win conditions around placed move horizontally
-		// checks for win conditions around placed move vertically
-		// checks for win conditions around placed move diagonally
-		// if there's no win, move to next player, restarting the playerTurn method
-		// if it wins, display win message and end
+		int N = 4;
 		boolean win = false;
 		int currentPlayerTurnNumber = 0;
 		while (!win) {
@@ -60,7 +53,7 @@ public class Game {
 
 				int rowNumber = placeMove(columnNumber, Players[currentPlayerTurnNumber].gameToken);
 				// ToDo change N to user input, hardcoded to 4 below
-				if (checkWin(Players[currentPlayerTurnNumber].gameToken, columnNumber, rowNumber, 4)) {
+				if (checkWin(Players[currentPlayerTurnNumber].gameToken, columnNumber, rowNumber, N)) {
 					win = true;
 					System.out.println("Great job, " + Players[currentPlayerTurnNumber].gameToken);
 					break;
@@ -74,12 +67,8 @@ public class Game {
 
 				Board.drawBoard();
 
-				// check the array length
-				// if it's not at the max, increment by 1
-				// if at max set to zero
-
 			} else {
-				// skip turn
+				// ToDo: add logic to start turn again for this player
 			}
 
 		}
@@ -125,7 +114,6 @@ public class Game {
 				if (matchingTokens == N) {
 					return true;
 				}
-				System.out.println("Matching tokens are " + matchingTokens);
 			} else {
 				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
@@ -134,16 +122,6 @@ public class Game {
 		}
 
 		return false;
-
-		// if you have enough matching tokens in a row, return true to win
-
-		// local var matchingTokens
-		// loop over the row designated
-		// continue to iterate while you see matching tokens and matchingToken +1;
-		// stop if you don't continue to see matching tokens : flase
-		// stop if you see N number of tokens in a row and return true
-		// if matchingTokens == n; return true
-		// if you reach the end of the row without matching N tokens, return false
 	}
 
 	boolean checkVertical(char gameToken, int columnNumber, int rowNumber, int N) {
@@ -206,7 +184,6 @@ public class Game {
 				if (matchingTokens == N) {
 					return true;
 				}
-				//System.out.println("Matching tokens are " + matchingTokens);
 			} else {
 				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
@@ -255,7 +232,6 @@ public class Game {
 				if (matchingTokens == N) {
 					return true;
 				}
-				//System.out.println("Matching tokens are " + matchingTokens);
 			} else {
 				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
@@ -266,7 +242,7 @@ public class Game {
 		return false;
 		
 	}
-
+//this method combines all checks for different types of win conditions defined earlier
 	boolean checkWin(char gameToken, int columnNumber, int rowNumber, int N) {
 		if (checkVertical(gameToken, columnNumber, rowNumber, N) == true) {
 			return true;
