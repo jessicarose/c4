@@ -10,33 +10,38 @@ public class Main {
 	public static void main(String[] args) throws IllegalArgumentException, IOException { 
 		Game Game = new Game();
 	
-		Game.playerTurn();
-         /*
+		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Press 2 for a 2 player game. 3 for a 3 player game.");
+		
+		System.out.println("Welcome to ConnectN");
+		
+		//user prompt to select win condition
+		System.out.println("To play the game type in the number of the column you want to drop you counter in");
+
+		
+		//sets N as win condition
+		BufferedReader reader2 = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("How many tokens in a row to win? Select 3-6");
+		int N = Integer.parseInt(reader.readLine());
+		Game.setN(N);
+		
+		System.out.println("How many players would you like?");
+		System.out.println("Press 2 for 2 player game, 3 for 3 player");
+		BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
+		int numberOfPlayers = Integer.parseInt(reader.readLine());
+		Game.setPlayers(numberOfPlayers);
+		System.out.println(
+				"A player wins by connecting" + N + " counters in a row - vertically, horizontally or diagonally");
+		System.out.println("");
+
+		
+		Game.playerTurn();
+
+
+		}
 		 
-		int userInput = Integer.parseInt(reader.readLine());
 		
-		//take user input
-		if (userInput == 2) {
-			System.out.println("2 player game");
-			//1 human, 1 computer
-			//run game.java here
-		}
-		else if (userInput == 3){
-			System.out.println("3 player game");
-			//1 human, 2 computer
-			//run game2.java here
-		}
-		else {
-			System.out.println("Please try again, selecting 2 or 3");
-			
-		} */
-		
-		//if 2, run game
-		
-		//if 3 run game2
-		//if anything else, ask again
+
 
 	}
 
@@ -45,19 +50,25 @@ public class Main {
 	//draw board: done
 	//Instantiate players: done
 	//Set between 2-3 players
-	//create computer player logic
+	//create computer player logic: test
 	//--
 	//place move: done for humans
 	//check move is possible: done for humans
 	//check space is empty: done for humans
 	//place token: done
-	//check move for win condition
+	//check move for win condition: done
 	//check board for full fullness
 	//--
 	//next player
 	//repeat in --
 	//
+	
+	//ToDos:
+	//set N to user input: here or on main? how to set as a global variable?
+	//set 2 or 3 players to user input
+	//restart a player's turn if invalid move entered
+	//
 
 	
 	
-}
+

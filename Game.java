@@ -6,47 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-//run this version of the game for 1 human player against 1 computer player
-	private HumanPlayer Player1;
-	private HumanPlayer Player2;
-	// private ComputerPlayer Player3;
 	private Board Board;
 	private Player[] Players;
 
+	
+	int N;
 	public Game() {
-		// change this 2 below to variable holding no of players
-		this.Players = new Player[2];
 		this.Board = new Board();
 		this.Board.defineBoard();
 		this.Board.drawBoard();
+	}
+	
+	public void setN (int N) {
+		this.N = N;
+	}
 
-		this.Player1 = new HumanPlayer('1');
-		// this.Player2 = new ComputerPlayer('x');
-		// this.Player3 = new ComputerPlayer('u');
-		this.Player2 = new HumanPlayer('2');
-
-		this.Players[0] = Player1;
-		this.Players[1] = Player2;
-
-
-		//
-
-		System.out.println("Welcome to ConnectN");
-		// change to connectN after this works
-		// write if loop printing out the 2 or 3 player game details
-		System.out.println("There are 2 players 1 and 2");
-		System.out.println("You are 1, Player 2 is 2");
-		System.out.println("To play the game type in the number of the column you want to drop you counter in");
-		System.out.println("A player wins by connecting 4 counters in a row - vertically, horizontally or diagonally");
-		System.out.println("");
-
+	public void setPlayers(int numberOfPlayers) {
+		this.Players = new Player[numberOfPlayers];
+		if (numberOfPlayers == 2) {
+			this.Players[0] = new HumanPlayer('1');
+			this.Players[1] = new ComputerPlayer('2');
+			System.out.println("You're playing against 1 computer player");
+		} else if (numberOfPlayers == 3) {
+			this.Players[0] = new HumanPlayer('1');
+			this.Players[1] = new ComputerPlayer('2');
+			this.Players[2] = new ComputerPlayer('3');
+			System.out.println("You're playing against 2 computer players");
+		} else {
+			System.out.println("You need to pick 2 or 3");
+		}
 	}
 
 	public void playerTurn() throws IOException {
-		int N = 4;
 		boolean win = false;
 		int currentPlayerTurnNumber = 0;
 		while (!win) {
+			Board.drawBoard();
 			int columnNumber = Players[currentPlayerTurnNumber].getMove();
 			boolean isValid = validateMove(columnNumber);
 			if (isValid) {
@@ -65,10 +60,8 @@ public class Game {
 					currentPlayerTurnNumber = 0;
 				}
 
-				Board.drawBoard();
-
 			} else {
-				// ToDo: add logic to start turn again for this player
+				System.out.print("Column full, try again");
 			}
 
 		}
@@ -146,16 +139,17 @@ public class Game {
 		return false;
 
 	}
+
 //this checks for wins along bottom left to top right axes
 	boolean checkDiagonal1(char gameToken, int rowNumber, int columnNumber, int N) {
 		List<point> diagonalPoints = new ArrayList<point>(); // this list represents all points along the diagonal
 		int row = rowNumber;
-		int column = columnNumber -1;
+		int column = columnNumber - 1;
 		int rowCount = Board.boardSpaces.length;
 		int columnCount = Board.boardSpaces[0].length;
-		
-		//bottom left d1
-		while (row<rowCount && column>=0) {
+
+		// bottom left d1
+		while (row < rowCount && column >= 0) {
 			point pt = new point();
 			pt.row = row;
 			pt.column = column;
@@ -163,20 +157,20 @@ public class Game {
 			row++;
 			column--;
 		}
-		row = rowNumber -1 ;
+		row = rowNumber - 1;
 		column = columnNumber;
-		//top right: d1
-		while(row>=0 && column< columnCount) {
+		// top right: d1
+		while (row >= 0 && column < columnCount) {
 			point pt = new point();
 			pt.row = row;
 			pt.column = column;
 			diagonalPoints.add(pt);
 			row--;
-			column ++;
-			
+			column++;
+
 		}
 		int matchingTokens = 0;
-		for(int i = 0; i < diagonalPoints.size();i ++) {
+		for (int i = 0; i < diagonalPoints.size(); i++) {
 			point pt = diagonalPoints.get(i);
 			if (Board.boardSpaces[pt.row][pt.column] == gameToken) {
 				// increment matching Tokens counter as more are found in a row
@@ -188,22 +182,23 @@ public class Game {
 				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
 			}
-			
+
 		}
 
 		return false;
-		
+
 	}
-	//this checks for wins along top right to bottom left axes
+
+	// this checks for wins along top right to bottom left axes
 	boolean checkDiagonal2(char gameToken, int rowNumber, int columnNumber, int N) {
 		List<point> diagonalPoints = new ArrayList<point>(); // this list represents all points along the diagonal
 		int row = rowNumber;
-		int column = columnNumber -1;
+		int column = columnNumber - 1;
 		int rowCount = Board.boardSpaces.length;
 		int columnCount = Board.boardSpaces[0].length;
-		
-		//bottom right d2
-		while(row<rowCount && column<columnCount) {
+
+		// bottom right d2
+		while (row < rowCount && column < columnCount) {
 			point pt = new point();
 			pt.row = row;
 			pt.column = column;
@@ -211,20 +206,20 @@ public class Game {
 			row++;
 			column++;
 		}
-		row = rowNumber -1 ;
+		row = rowNumber - 1;
 		column = columnNumber - 2;
-		//top left: d2
-		while(row>=0 && column>=0) {
+		// top left: d2
+		while (row >= 0 && column >= 0) {
 			point pt = new point();
 			pt.row = row;
 			pt.column = column;
 			diagonalPoints.add(pt);
 			row--;
-			column --;
-			
+			column--;
+
 		}
 		int matchingTokens = 0;
-		for(int i = 0; i < diagonalPoints.size();i ++) {
+		for (int i = 0; i < diagonalPoints.size(); i++) {
 			point pt = diagonalPoints.get(i);
 			if (Board.boardSpaces[pt.row][pt.column] == gameToken) {
 				// increment matching Tokens counter as more are found in a row
@@ -236,12 +231,13 @@ public class Game {
 				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
 			}
-			
+
 		}
 
 		return false;
-		
+
 	}
+
 //this method combines all checks for different types of win conditions defined earlier
 	boolean checkWin(char gameToken, int columnNumber, int rowNumber, int N) {
 		if (checkVertical(gameToken, columnNumber, rowNumber, N) == true) {
@@ -251,16 +247,15 @@ public class Game {
 		if (checkHorizontal(gameToken, rowNumber, N)) {
 			return true;
 		}
-		
-		if(checkDiagonal1(gameToken, rowNumber, columnNumber, N)== true){
+
+		if (checkDiagonal1(gameToken, rowNumber, columnNumber, N) == true) {
 			return true;
 		}
-		
-		if(checkDiagonal2(gameToken, rowNumber, columnNumber, N)== true){
+
+		if (checkDiagonal2(gameToken, rowNumber, columnNumber, N) == true) {
 			return true;
 		}
 		return false;
 	}
 
-	
 }
