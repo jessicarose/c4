@@ -43,12 +43,14 @@ public class Main {
 
 
 	//draw board: done
-	//Instantiate players
+	//Instantiate players: done
+	//Set between 2-3 players
+	//create computer player logic
 	//--
-	//place move
-	//check move is possible
-	//check space is empty
-	//place token
+	//place move: done for humans
+	//check move is possible: done for humans
+	//check space is empty: done for humans
+	//place token: done
 	//check move for win condition
 	//check board for full fullness
 	//--

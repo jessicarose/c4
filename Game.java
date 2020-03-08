@@ -2,6 +2,8 @@ package connect4;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 //run this version of the game for 1 human player against 1 computer player
@@ -55,8 +57,14 @@ public class Game {
 			int columnNumber = Players[currentPlayerTurnNumber].getMove();
 			boolean isValid = validateMove(columnNumber);
 			if (isValid) {
-				placeMove(columnNumber, Players[currentPlayerTurnNumber].gameToken);
-				if(checkHorizontal(Players[currentPlayerTurnNumber].gameToken, rowNumber, N))
+
+				int rowNumber = placeMove(columnNumber, Players[currentPlayerTurnNumber].gameToken);
+				// ToDo change N to user input, hardcoded to 4 below
+				if (checkWin(Players[currentPlayerTurnNumber].gameToken, columnNumber, rowNumber, 4)) {
+					win = true;
+					System.out.println("Great job, " + Players[currentPlayerTurnNumber].gameToken);
+					break;
+				}
 				// move to next player's turn
 				currentPlayerTurnNumber = currentPlayerTurnNumber + 1;
 				// loop back to the first player if it's their turn
@@ -100,9 +108,6 @@ public class Game {
 
 		}
 		return rowToReturn;
-		
-		
-		
 
 		// loop up from bottom of the array
 		// find the first blank space in the column
@@ -111,25 +116,26 @@ public class Game {
 
 	boolean checkHorizontal(char gameToken, int rowNumber, int N) {
 		int matchingTokens = 0;
-		for (int i = 0; i <= Board.boardSpaces[0].length; i++) {
-//check the row you've just made a move in to see if there are consecutive matching tokens
-			if( Board.boardSpaces[rowNumber][i] == gameToken) {
-				//increment matching Tokens counter as more are found in a row
+		for (int i = 0; i < Board.boardSpaces[0].length; i++) {
+			// check the row you've just made a move in to see if there are consecutive
+			// matching tokens
+			if (Board.boardSpaces[rowNumber][i] == gameToken) {
+				// increment matching Tokens counter as more are found in a row
 				matchingTokens++;
+				if (matchingTokens == N) {
+					return true;
+				}
+				System.out.println("Matching tokens are " + matchingTokens);
 			} else {
-				//if matching tokens aren't found back to back, reset this counter to 0
+				// if matching tokens aren't found back to back, reset this counter to 0
 				matchingTokens = 0;
 			}
-			
+
 		}
-		
-		
-		if (matchingTokens == N) {
-			return true;
-		}
-		else {
-			return false;
-		}
+
+		return false;
+
+		// if you have enough matching tokens in a row, return true to win
 
 		// local var matchingTokens
 		// loop over the row designated
@@ -140,10 +146,145 @@ public class Game {
 		// if you reach the end of the row without matching N tokens, return false
 	}
 
-	// take in the col number
-	// -1
-	// iterate through column
-	// stop iterating and return true when it sees a .
-	// stop iterating and return false if there are no .
+	boolean checkVertical(char gameToken, int columnNumber, int rowNumber, int N) {
+		int matchingTokens = 0;
+		// start at the row space where a token has been placed
+		for (int i = rowNumber; i < Board.boardSpaces.length; i++) {
+			// check the row you've just made a move in to see if there are consecutive
+			// matching tokens
+			if (Board.boardSpaces[i][columnNumber - 1] == gameToken) {
+				// increment matching Tokens counter as more are found in a row
+				matchingTokens++;
+				if (matchingTokens == N) {
+					return true;
+				}
+			} else {
+				// if matching tokens aren't found back to back, reset this counter to 0
+				matchingTokens = 0;
+			}
 
+		}
+
+		return false;
+
+	}
+//this checks for wins along bottom left to top right axes
+	boolean checkDiagonal1(char gameToken, int rowNumber, int columnNumber, int N) {
+		List<point> diagonalPoints = new ArrayList<point>(); // this list represents all points along the diagonal
+		int row = rowNumber;
+		int column = columnNumber -1;
+		int rowCount = Board.boardSpaces.length;
+		int columnCount = Board.boardSpaces[0].length;
+		
+		//bottom left d1
+		while (row<rowCount && column>=0) {
+			point pt = new point();
+			pt.row = row;
+			pt.column = column;
+			diagonalPoints.add(pt);
+			row++;
+			column--;
+		}
+		row = rowNumber -1 ;
+		column = columnNumber;
+		//top right: d1
+		while(row>=0 && column< columnCount) {
+			point pt = new point();
+			pt.row = row;
+			pt.column = column;
+			diagonalPoints.add(pt);
+			row--;
+			column ++;
+			
+		}
+		int matchingTokens = 0;
+		for(int i = 0; i < diagonalPoints.size();i ++) {
+			point pt = diagonalPoints.get(i);
+			if (Board.boardSpaces[pt.row][pt.column] == gameToken) {
+				// increment matching Tokens counter as more are found in a row
+				matchingTokens++;
+				if (matchingTokens == N) {
+					return true;
+				}
+				//System.out.println("Matching tokens are " + matchingTokens);
+			} else {
+				// if matching tokens aren't found back to back, reset this counter to 0
+				matchingTokens = 0;
+			}
+			
+		}
+
+		return false;
+		
+	}
+	//this checks for wins along top right to bottom left axes
+	boolean checkDiagonal2(char gameToken, int rowNumber, int columnNumber, int N) {
+		List<point> diagonalPoints = new ArrayList<point>(); // this list represents all points along the diagonal
+		int row = rowNumber;
+		int column = columnNumber -1;
+		int rowCount = Board.boardSpaces.length;
+		int columnCount = Board.boardSpaces[0].length;
+		
+		//bottom right d2
+		while(row<rowCount && column<columnCount) {
+			point pt = new point();
+			pt.row = row;
+			pt.column = column;
+			diagonalPoints.add(pt);
+			row++;
+			column++;
+		}
+		row = rowNumber -1 ;
+		column = columnNumber - 2;
+		//top left: d2
+		while(row>=0 && column>=0) {
+			point pt = new point();
+			pt.row = row;
+			pt.column = column;
+			diagonalPoints.add(pt);
+			row--;
+			column --;
+			
+		}
+		int matchingTokens = 0;
+		for(int i = 0; i < diagonalPoints.size();i ++) {
+			point pt = diagonalPoints.get(i);
+			if (Board.boardSpaces[pt.row][pt.column] == gameToken) {
+				// increment matching Tokens counter as more are found in a row
+				matchingTokens++;
+				if (matchingTokens == N) {
+					return true;
+				}
+				//System.out.println("Matching tokens are " + matchingTokens);
+			} else {
+				// if matching tokens aren't found back to back, reset this counter to 0
+				matchingTokens = 0;
+			}
+			
+		}
+
+		return false;
+		
+	}
+
+	boolean checkWin(char gameToken, int columnNumber, int rowNumber, int N) {
+		if (checkVertical(gameToken, columnNumber, rowNumber, N) == true) {
+			return true;
+		}
+
+		if (checkHorizontal(gameToken, rowNumber, N)) {
+			return true;
+		}
+		
+		if(checkDiagonal1(gameToken, rowNumber, columnNumber, N)== true){
+			return true;
+		}
+		
+		if(checkDiagonal2(gameToken, rowNumber, columnNumber, N)== true){
+			return true;
+		}
+		return false;
+	}
+
+	
 }
