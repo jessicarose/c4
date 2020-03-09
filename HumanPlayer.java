@@ -16,6 +16,7 @@ class HumanPlayer extends Player{
 	    System.out.println("Pick your row, 1-7");   
 	    
 	    String input = inputMove.nextLine();  // Read user input
+	    //returns user input as move
 	    return(Integer.parseInt(input));
 
 		    

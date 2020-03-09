@@ -16,7 +16,7 @@ public class Board {
 	  }
 	  }
 	  public void drawBoard() {
-		  //shows human user col number for play
+		  //shows human user column number for play
 		  System.out.println("1234567");
 		 for (int j = 0; j < columns; j++) {
 			 System.out.println(boardSpaces[j]);

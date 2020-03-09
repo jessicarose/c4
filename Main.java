@@ -24,7 +24,7 @@ public class Main {
 		System.out.print("How many tokens in a row to win? Select 3-6");
 		int N = Integer.parseInt(reader.readLine());
 		Game.setN(N);
-		
+		//select 2 or 3 player game
 		System.out.println("How many players would you like?");
 		System.out.println("Press 2 for 2 player game, 3 for 3 player");
 		BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
@@ -46,29 +46,9 @@ public class Main {
 	}
 
 
-
-	//draw board: done
-	//Instantiate players: done
-	//Set between 2-3 players
-	//create computer player logic: test
-	//--
-	//place move: done for humans
-	//check move is possible: done for humans
-	//check space is empty: done for humans
-	//place token: done
-	//check move for win condition: done
-	//check board for full fullness
-	//--
-	//next player
-	//repeat in --
-	//
-	
-	//ToDos:
-	//set N to user input: here or on main? how to set as a global variable?
-	//set 2 or 3 players to user input
-	//restart a player's turn if invalid move entered
-	//
-
+//Future ToDos:
+//Extend to support rendering emoji in command line
+//Extend to allow for variable human/computer player combos
 	
 	
 
